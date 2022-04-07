@@ -1,0 +1,23 @@
+{
+  "name": "it122-s22",
+  "version": "1.0.0",
+  "description": "learning node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matthieu-ui/it122-S22.git"
+  },
+  "keywords": [
+    "node.js",
+    "it122"
+  ],
+  "author": "Matthieu Felker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matthieu-ui/it122-S22/issues"
+  },
+  "homepage": "https://github.com/Matthieu-ui/it122-S22#readme"
+}
