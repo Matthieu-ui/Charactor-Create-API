@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "it122-s22",
   "version": "1.0.0",
   "description": "learning node",
