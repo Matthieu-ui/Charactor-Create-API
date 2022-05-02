@@ -1,63 +1,63 @@
-//STR - Strength 
-//DEX - Dexterity 
-//CON - Constitution
-//INT - Intelligence
-//WIS - Wisdom
-//CHA - Charisma
+//str - strength 
+//dex - dexterity 
+//con - Constitution
+//int - intelligence
+//wis - wisdom
+//cha - charisma
 
 export const titans = [
 
     {
-        NAME: 'The Attack Titan',
-        STR: '28 (+9)',
-        DEX: '22 (+6)',
-        CON: '24 (+7)',
-        INT: '13 (+1)',
-        WIS: '8 (-1)',
-        CHA: '11 (+0)'
+        name: 'The Attack Titan',
+        str: '28 (+9)',
+        dex: '22 (+6)',
+        con: '24 (+7)',
+        int: '13 (+1)',
+        wis: '8 (-1)',
+        cha: '11 (+0)'
 
     },
 
     {
-        NAME: 'Beast',
-        STR: '30 (+10)',
-        DEX: '25 (+7)',
-        CON: '28 (+9)',
-        INT: '21 (+5)',
-        WIS: '16 (+3',
-        CHA: '17 (+3)'
+        name: 'Beast',
+        str: '30 (+10)',
+        dex: '25 (+7)',
+        con: '28 (+9)',
+        int: '21 (+5)',
+        wis: '16 (+3',
+        cha: '17 (+3)'
 
     },
     {
-        NAME: 'Cart Titan',
-        STR: '25 (+7)',
-        DEX: '24 (+7)',
-        CON: '22 (+6)',
-        INT: '17 (+3)',
-        WIS: '19 (+4)',
-        CHA: '17 (+3)'
-
-    },
-
-    {
-        NAME: 'The Colossal Titan',
-        STR: '30 (+10)',
-        DEX: '1 (-5)',
-        CON: '30 (+10)',
-        INT: '18 (+4)',
-        WIS: '11 (+0)',
-        CHA: '9 (-1)'
+        name: 'Cart Titan',
+        str: '25 (+7)',
+        dex: '24 (+7)',
+        con: '22 (+6)',
+        int: '17 (+3)',
+        wis: '19 (+4)',
+        cha: '17 (+3)'
 
     },
 
     {
-        NAME: 'Mindless Titan',
-        STR: '24 (+7)',
-        DEX: '15 (+2)',
-        CON: '19 (+4)',
-        INT: '1 (-5)',
-        WIS: '17 (+3)',
-        CHA: '1 (-5)'
+        name: 'The Colossal Titan',
+        str: '30 (+10)',
+        dex: '1 (-5)',
+        con: '30 (+10)',
+        int: '18 (+4)',
+        wis: '11 (+0)',
+        cha: '9 (-1)'
+
+    },
+
+    {
+        name: 'Mindless Titan',
+        str: '24 (+7)',
+        dex: '15 (+2)',
+        con: '19 (+4)',
+        int: '1 (-5)',
+        wis: '17 (+3)',
+        cha: '1 (-5)'
 
     },
 
@@ -69,7 +69,7 @@ export const getAll = () => {
 
 export const getItem = (val) => {
     const findTitans = (titans) => {
-        return titans.NAME === val;
+        return titans.name === val;
     }
     const result = titans.find(findTitans);
     return result;
