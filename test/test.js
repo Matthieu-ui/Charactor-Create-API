@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as titans from "../data.js";
+import * as titans from "../data/data.js";
 
 describe("titans module", () => {
  it("returns requested titan", function() {

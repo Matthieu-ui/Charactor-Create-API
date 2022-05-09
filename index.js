@@ -1,11 +1,33 @@
-import * as titans from './data.js';
-import http from 'http';
+//import * as titans from './data/data.js';
+//import http from 'http';
+import express from 'express';
+import { Titan } from "./Titans.js"
 
 
+const app = express();
+app.set('port', process.env.PORT || 3000);
+app.set('view engine', 'ejs');
+app.use(express.static('./public')); // set location for static files
+app.use(express.urlencoded()); //Parse URL-encoded bodies
+
+app.get('/', (req, res) => {
+  Titan.find({}).lean().then((titans) => {
+    res.render('home', { titans });
+  })
+});
+
+app.get('/detail', (req,res) => {
+  Titan.findOne({ artist:req.query.name }).lean().then((titan) => {
+          res.render('details', {result: titan} )
+      })
+})
+
+app.listen(app.get('port'), () => {
+  console.log('Express started');
+});
 
 
-
-http.createServer((req, res) => {
+/*http.createServer((req, res) => {
   const path = req.url.toLowerCase()
   let url_parts = req.url.split("?"); 
   console.log(url_parts)
@@ -35,7 +57,9 @@ http.createServer((req, res) => {
    
     default:
       res.writeHead(404, {'Content-Type': 'text/plain'});
-      res.end('page unavailable');
+      res.end('404 error : page unavailable');
       break;
   }
-}).listen(process.env.PORT || 3000);
+
+  
+}).listen(process.env.PORT || 3000);*/
