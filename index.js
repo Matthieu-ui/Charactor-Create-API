@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/detail', (req,res) => {
-  Titan.findOne({ artist:req.query.name }).lean().then((titan) => {
+  Titan.findOne({ name:req.query.name }).lean().then((titan) => {
           res.render('details', {result: titan} )
       })
 })
