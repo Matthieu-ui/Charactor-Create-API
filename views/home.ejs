@@ -1,24 +1,30 @@
 <link rel="stylesheet" href="/css/styles.css">
 
 <body>
-    
+
     <div class="container">
         <div class="row">
             <div class="full column">
+                <div class="wrap">
+                    
+                    <h1>Home</h1>
+                    <hr>
+                    <h3>Titans</h3>
 
-                <h1>Home</h1>
-                <hr>
-                <h3>Titans</h3>
-             
-                <% titans.forEach(function(titans){%>
-             <li><a href="/detail?name=<%=titans.name %>"> <%= titans.name %></a> </li>
-                 <% }); %>
+                    <% titans.forEach(function(titans){%>
+                        <li><a href="/detail?name=<%=titans.name %>">
+                                <%= titans.name %>
+                            </a> </li>
+                        <% }); %>
+                </div>
 
-                
+
+
             </div>
-            
+
         </div>
     </div>
-  
+
 </body>
-</html>             
+
+</html>
