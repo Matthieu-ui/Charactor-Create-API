@@ -1,4 +1,4 @@
-import { Titan } from "../Titans.js";
+import { Titan } from "../models/Titans";
 
 // return all records
 Titan.find({}).lean()

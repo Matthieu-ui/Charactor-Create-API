@@ -1,7 +1,7 @@
 //import * as titans from './data/data.js';
 //import http from 'http';
 import express from 'express';
-import { Titan } from "./Titans.js"
+import { Titan } from "./models/Titans.js"
 
 
 const app = express();
