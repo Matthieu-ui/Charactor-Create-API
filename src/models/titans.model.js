@@ -18,8 +18,8 @@ mongoose.connection.on('open', () => {
 // define data model as JSON key/value pairs
 // values indicate the data type of each key
 const titanSchema = new Schema({
- title: { type: String, required: true },
- name: String,
+
+ name: { type: String, required: true },
  dex: String,
  str: String,
  dex: String,
@@ -27,8 +27,6 @@ const titanSchema = new Schema({
  con: String,
  int: String,
  wis: String
-
-
 });
 
-export const Titan = mongoose.model('Titan', titanSchema);
+export const titansModel = mongoose.model('Titan', titanSchema);
