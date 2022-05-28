@@ -16,7 +16,7 @@ api.get('/getAll', (req, res) => {
 api.get("/getByName/:name", (req, res) => {
     titansModel.findOne({ name: req.params.name }, (err, titan) => {
         if (err || !titan) {
-            res.status(200).json({"message":"Database error, titan not found"});
+            res.status(500).json({"message":"Database error, titan not found"});
         } else {
             res.json( titan );
          }
@@ -42,7 +42,7 @@ api.post('/add', (req, res) => {
     const newTitan = {'name': req.body.name, 'str': req.body.str, 'dex': req.body.dex, 'con': req.body.con, 'int': req.body.int, 'wis': req.body.wis, 'cha': req.body.cha}
     titansModel.updateOne({'name': req.body.name,}, newTitan, {upsert:true}, (err, titan) => {
       if (err || !titan) {
-        res.status(200).json({"message":"error - something went wrong"});
+        res.status(500).json({"message":"error - something went wrong"});
     } else {
         res.json( newTitan );
      }
