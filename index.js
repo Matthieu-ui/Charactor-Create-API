@@ -25,7 +25,7 @@ app.use('/api', api);
 
 app.get('/', (req, res) => {
   titansModel.find({}).lean().then((titans) => {
-    res.render('home', { titans });
+    res.render('home_react', { titans: JSON.stringify(titans) });
   })
 });
 
