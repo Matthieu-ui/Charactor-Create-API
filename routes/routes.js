@@ -16,7 +16,7 @@ api.get('/getAll', (req, res) => {
 api.get("/getByName/:name", (req, res) => {
     titansModel.findOne({ name: req.params.name }, (err, titan) => {
         if (err || !titan) {
-            res.status(200).json({"message":"Database error, artist not found"});
+            res.status(200).json({"message":"Database error, titan not found"});
         } else {
             res.json( titan );
          }
