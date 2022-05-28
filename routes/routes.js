@@ -51,8 +51,8 @@ api.post('/add', (req, res) => {
 
   api.get("/delete/:name", (req, res) => {
       titansModel.deleteOne({name: req.params.name}, (err, titan) => {
-        if (err || !titan) {
-            res.json({ success: false, error: "Titan not found" });
+        if (titan.deletedCount === 0) {
+            res.status(500).json({"message": "Not Found"});
         } else {
             res.json( titan );
         }
