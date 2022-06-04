@@ -1,7 +1,6 @@
 <html>
   <head>
     <title>React Home</title>
-
     <link rel="stylesheet" href="/css/styles.css" />
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
@@ -14,37 +13,98 @@
     <div id="root"></div>
     <script type="text/babel">
 
-
-      const titans = <%- titans %>;
-
-      const listTitans = titans.map((titansModel) => <li key={titansModel.name}><a href={`detail?name=${titansModel.name}`} >{titansModel.name}</a></li>);
-
-
-          const Greeting = (props) => {
-            if (props.user) {
-              return <h6>Hello, <b>{props.user}</b>!</h6>;
-            }
-            return <h6>Hello, <b>Stranger</b>.</h6>;
+        const Greeting = (props) => {
+          if (props.user) {
+            return <h6>Hello, <b>{props.user}</b>!</h6>;
           }
-      
+          return <p>welcome, <b>Stranger</b>.</p>;
+        }
 
-          const App = () => {
+
+        const AllTitans = (props) => {
+          //const titans = <%- titans %>;
+          const listTitans = props.data.map((titansModel) =>
+
+          <li key={titansModel.name} id={titansModel.name} onClick={props.clickHandler}>
+            {titansModel.name}
+          </li>);
+
+          return <ul>{listTitans}</ul>
+        }
+
+
+        //trouble with form 
+        //<label>Title: <input type="text" name="name" onChange={props.onChange} value={props.titansModel.name || ""}/>
+        //<label>Title: <input type="text" name="title" onChange={props.onChange} value={props.titansModel.title || ""}/></
+        const TitanDetail = (props) => {
+          return  (
+              <div>
+                  <hr/>
+                  <h4>Details:</h4>
+                 <form>
+                </form>
+               
+          
+                  <aside><button onClick={props.resetHandler} type="button">Reset</button></aside>
+              </div>
+          )
+      }
+
+
+        class App extends React.Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              titans: <%- titans %>,
+              currentItem: {}
+            };
+           //this.selectTitan = this.selectTitan.bind(this);
+          }
+
+          //click event handler
+          showDetail = (event) => {
+            console.log(event.target)
+            console.log(event.target.innerText)
+            console.log(event.target.id)
+
+            // does this title object have ties to my detail? tried changing to name. 
+            let title = event.target.innerText
+            let newTitan = this.state.titans.find((titansModel) => titansModel.name == name)
+            this.setState({"currentTitan": newTitan})
+         
+          }
+
+          fieldChanged = (event) => {
+            let newTitan = this.state.currentTitan;
+            newTitan[event.target.name] = event.target.value;
+            this.setState({currentTitan: newTitan});
+        }
+
+
+
+          render() {
             return <div>
               <div className="container">
                 <div className="row">
                     <div className="full column">
                         <div className="wrap">
                             <h1>Home</h1>
-                            <hr></hr>
+                            <hr/>
                             <aside><Greeting /></aside>
                             <h3>Titans</h3>
-                            <ul>{listTitans}</ul>
+
+                            < AllTitans data={this.state.titans} clickHandler={this.showDetail} />
+
+                            < TitanDetail titansModel={this.state.currentTitan} onChange={this.fieldChanged}/>
+
                         </div>
+
                     </div>
                 </div>
             </div>
             </div>;
           }
+        }
 
           ReactDOM.render(<App />, document.getElementById('root'));
     </script>
