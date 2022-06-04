@@ -25,26 +25,23 @@
           //const titans = <%- titans %>;
           const listTitans = props.data.map((titansModel) =>
 
-          <li key={titansModel.name} id={titansModel.name} onClick={props.clickHandler}>
+          <li key={titansModel._id} id={titansModel._id} onClick={props.clickHandler}>
             {titansModel.name}
           </li>);
+   
 
           return <ul>{listTitans}</ul>
         }
 
 
-        //trouble with form
-        //<label>Title: <input type="text" name="name" onChange={props.onChange} value={props.titansModel.name || ""}/>
-        //<label>Title: <input type="text" name="title" onChange={props.onChange} value={props.titansModel.title || ""}/></
+        //trouble with {props.titansModel.name}
+ 
         const TitanDetail = (props) => {
           return  (
               <div>
                   <hr/>
                   <h4>Details:</h4>
-                 <form>
-                </form>
-
-
+                
                   <aside><button onClick={props.resetHandler} type="button">Reset</button></aside>
               </div>
           )
@@ -64,13 +61,15 @@
           //click event handler
           showDetail = (event) => {
             console.log(event.target)
-            console.log(event.target.innerText)
             console.log(event.target.id)
 
-            // is this the source of my issue? tried changing to everything name/title also.
-            let title = event.target.innerText
-            let newTitan = this.state.titans.find((titansModel) => titansModel.name == name)
-            this.setState({"currentTitan": newTitan})
+           
+            let name = event.target.innerText;
+            let newTitan = this.state.titans.find((titansModel) => titansModel.name == name);
+            console.log(name)
+            console.log(newTitan)
+            
+            this.setState({"currentTitan": newTitan});
 
           }
 
