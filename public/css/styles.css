@@ -33,6 +33,23 @@
 aside{
   float: right;
 }
+.titanSelector{
+  cursor: pointer;
+  list-style: none;
+  font-weight: bolder;
+  padding: 1em;
+  height: min-content;
+  
+
+}
+.titanSelector:hover{
+color: rgb(55, 11, 11);
+background-color: rgb(244, 244, 244);
+padding: 1em;
+border-radius: 4px;
+
+  
+}
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -136,8 +153,8 @@ aside{
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222;
     background-color: white;
-    height: 100%;
-    width: 960px;
+    height: fit-content;
+    width: 90%;
     margin: auto;
    }
     

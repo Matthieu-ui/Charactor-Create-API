@@ -21,28 +21,56 @@
         }
 
 
+        const Footer = (props) => {
+         return (
+           <div>
+            <footer>
+              <p>
+                &copy; 2021-2022 by{" "}
+             Matthieu Felker
+              </p>
+            </footer>
+           </div>
+         )
+        }
+
+
+
         const AllTitans = (props) => {
           //const titans = <%- titans %>;
+
           const listTitans = props.data.map((titansModel) =>
 
-          <li key={titansModel._id} id={titansModel._id} onClick={props.clickHandler}>
-            {titansModel.name}
+          <li className="titanSelector" key={titansModel._id}  id={titansModel._id} onClick={props.clickHandler}>{titansModel.name}
           </li>);
-   
+
 
           return <ul>{listTitans}</ul>
         }
 
 
         //trouble with {props.titansModel.name}
- 
+
         const TitanDetail = (props) => {
           return  (
               <div>
                   <hr/>
-                  <h4>Details:</h4>
-                
                   <aside><button onClick={props.resetHandler} type="button">Reset</button></aside>
+                  <h4>Details:</h4>
+
+                  <form>
+                    <label>Name: <input type="text" name="name" onChange={props.onChange} value={props.titansModel.name || ""}/></label>
+                    <label>Strength: <input type="text" name="strength" onChange={props.onChange} value={props.titansModel.str || ""}/></label>
+                    <label>Dexterity: <input type="text" name="dexterity" onChange={props.onChange} value={props.titansModel.dex || ""}/></label>
+                    <label>Constitution: <input type="text" name="constitution" onChange={props.onChange} value={props.titansModel.con || ""}/></label>
+                    <label>Intelligence: <input type="text" name="intelligence" onChange={props.onChange} value={props.titansModel.int || ""}/></label>
+                    <label>Wisdom: <input type="text" name="wisdom" onChange={props.onChange} value={props.titansModel.wis || ""}/></label>
+                    <label>Charisma: <input type="text" name="charisma" onChange={props.onChange} value={props.titansModel.cha || ""}/></label>
+
+
+                  </form>
+
+
               </div>
           )
       }
@@ -53,22 +81,16 @@
             super(props);
             this.state = {
               titans: <%- titans %>,
-              currentItem: {}
+              currentTitan: {}
             };
            //this.selectTitan = this.selectTitan.bind(this);
           }
 
           //click event handler
           showDetail = (event) => {
-            console.log(event.target)
-            console.log(event.target.id)
-
-           
             let name = event.target.innerText;
             let newTitan = this.state.titans.find((titansModel) => titansModel.name == name);
-            console.log(name)
             console.log(newTitan)
-            
             this.setState({"currentTitan": newTitan});
 
           }
@@ -79,6 +101,10 @@
             this.setState({currentTitan: newTitan});
         }
 
+        clearForm = (event) => {
+          this.setState({currentTitan: [{}]});
+        }
+
 
 
           render() {
@@ -87,17 +113,15 @@
                 <div className="row">
                     <div className="full column">
                         <div className="wrap">
+                          <aside><Greeting /></aside>
                             <h1>Home</h1>
                             <hr/>
-                            <aside><Greeting /></aside>
                             <h3>Titans</h3>
-
                             < AllTitans data={this.state.titans} clickHandler={this.showDetail} />
-
-                            < TitanDetail titansModel={this.state.currentTitan} onChange={this.fieldChanged}/>
-
+                            < TitanDetail titansModel={this.state.currentTitan} onChange={this.fieldChanged} resetHandler={this.clearForm}/>
+                            <hr/>
+                            <aside>< Footer/></aside>
                         </div>
-
                     </div>
                 </div>
             </div>
