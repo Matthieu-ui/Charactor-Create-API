@@ -30,8 +30,27 @@
   margin-top: 2em;
 }
 
+footer{
+  border-top: 1px solid black;
+  text-align: center;
+  margin-top: 1em;
+
+  position:absolute;
+  bottom: 1px;
+  width: 100%;
+}
+
 aside{
   float: right;
+}
+.titanContainer{
+  width: fit-content;
+  padding: 2em;
+}
+.detailContainer{
+  width: fit-content;
+  float: right;
+  padding: 2em;
 }
 .titanSelector{
   cursor: pointer;
@@ -39,6 +58,7 @@ aside{
   font-weight: bolder;
   padding: 1em;
   height: min-content;
+
   
 
 }
@@ -54,12 +74,13 @@ border-radius: 4px;
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .container {
-    position: relative;
-    width: 100%;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box; }
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  min-height: 100vh; }
   .column,
   .columns {
     width: 100%;
@@ -156,6 +177,7 @@ border-radius: 4px;
     height: fit-content;
     width: 90%;
     margin: auto;
+    position: relative;
    }
     
   

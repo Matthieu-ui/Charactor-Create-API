@@ -24,6 +24,7 @@
         const Footer = (props) => {
          return (
            <div>
+           
             <footer>
               <p>
                 &copy; 2021-2022 by{" "}
@@ -54,7 +55,7 @@
         const TitanDetail = (props) => {
           return  (
               <div>
-                  <hr/>
+                
                   <aside><button onClick={props.resetHandler} type="button">Reset</button></aside>
                   <h4>Details:</h4>
 
@@ -116,11 +117,12 @@
                           <aside><Greeting /></aside>
                             <h1>Home</h1>
                             <hr/>
-                            <h3>Titans</h3>
-                            < AllTitans data={this.state.titans} clickHandler={this.showDetail} />
-                            < TitanDetail titansModel={this.state.currentTitan} onChange={this.fieldChanged} resetHandler={this.clearForm}/>
-                            <hr/>
-                            <aside>< Footer/></aside>
+                            
+                            <div className="detailContainer">< TitanDetail titansModel={this.state.currentTitan} onChange={this.fieldChanged} resetHandler={this.clearForm}/></div>
+                            <div className="titanContainer"><h3>Titans</h3>< AllTitans data={this.state.titans} clickHandler={this.showDetail} /></div>
+                           
+                   
+                           < Footer/>
                         </div>
                     </div>
                 </div>
