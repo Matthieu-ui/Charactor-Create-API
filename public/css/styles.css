@@ -30,16 +30,6 @@
   margin-top: 2em;
 }
 
-footer{
-  border-top: 1px solid black;
-  text-align: center;
-  margin-top: 1em;
-
-  position:absolute;
-  bottom: 1px;
-  width: 100%;
-}
-
 aside{
   float: right;
 }
@@ -58,18 +48,24 @@ aside{
   font-weight: bolder;
   padding: 1em;
   height: min-content;
-
-  
-
 }
 .titanSelector:hover{
 color: rgb(55, 11, 11);
 background-color: rgb(244, 244, 244);
 padding: 1em;
 border-radius: 4px;
-
-  
 }
+
+footer{
+  border-top: 1px solid black;
+  text-align: center;
+  margin-top: 1em;
+  position:absolute;
+  bottom: 1px;
+  width: 100%;
+}
+
+
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 

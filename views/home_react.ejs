@@ -13,125 +13,185 @@
     <div id="root"></div>
     <script type="text/babel">
 
-        const Greeting = (props) => {
-          if (props.user) {
-            return <h6>Hello, <b>{props.user}</b>!</h6>;
+          const Greeting = (props) => {
+            if (props.user) {
+              return <h6>Hello, <b>{props.user}</b>!</h6>;
+            }
+            return <p>welcome, <b>Stranger</b>.</p>;
           }
-          return <p>welcome, <b>Stranger</b>.</p>;
+
+
+          const Footer = (props) => {
+           return (
+             <div>
+
+              <footer>
+                <p>
+                  &copy; 2021-2022 by{" "}
+               Matthieu Felker
+                </p>
+              </footer>
+             </div>
+           )
+          }
+
+
+
+          const AllTitans = (props) => {
+            //const titans = <%- titans %>;
+
+            const listTitans = props.data.map((titansModel) =>
+
+            <li className="titanSelector" key={titansModel._id}  id={titansModel._id} onClick={props.clickHandler}>{titansModel.name}
+            </li>);
+
+
+            return <ul>{listTitans}</ul>
+          }
+
+
+          const TitanDetail = (props) => {
+            return  (
+                <div>
+
+
+                    <h4>Details:</h4>
+
+                    <form>
+                      <label>Name: <input type="text" name="name" onChange={props.onChange} value={props.titansModel.name || ""}/></label>
+                      <label>Strength: <input type="text" name="strength" onChange={props.onChange} value={props.titansModel.str || ""}/></label>
+                      <label>Dexterity: <input type="text" name="dexterity" onChange={props.onChange} value={props.titansModel.dex || ""}/></label>
+                      <label>Constitution: <input type="text" name="constitution" onChange={props.onChange} value={props.titansModel.con || ""}/></label>
+                      <label>Intelligence: <input type="text" name="intelligence" onChange={props.onChange} value={props.titansModel.int || ""}/></label>
+                      <label>Wisdom: <input type="text" name="wisdom" onChange={props.onChange} value={props.titansModel.wis || ""}/></label>
+                      <label>Charisma: <input type="text" name="charisma" onChange={props.onChange} value={props.titansModel.cha || ""}/></label>
+
+
+                      <aside>
+                        <button onClick={props.resetHandler} type="button">Reset </button>
+                        <button onClick={props.saveHandler} type="button">Save </button>
+                        <button onClick={props.deleteHandler} type="button">Delete</button>
+                      </aside>
+
+
+                    </form>
+
+
+                </div>
+            )
         }
 
 
-        const Footer = (props) => {
-         return (
-           <div>
-           
-            <footer>
-              <p>
-                &copy; 2021-2022 by{" "}
-             Matthieu Felker
-              </p>
-            </footer>
-           </div>
-         )
+          class App extends React.Component {
+            constructor(props) {
+              super(props);
+              this.state = {
+                titans: <%- titans %>,
+                currentTitan: {}
+              };
+
+              this.showDetail = this.showDetail.bind(this);
+              this.deleteTitan = this.deleteTitan.bind(this);
+              this.saveTitan = this.saveTitan.bind(this);
+              this.deleteTitan = this.deleteTitan.bind(this);
+            }
+
+            //click event handlers
+            showDetail = (event) => {
+              let name = event.target.innerText;
+              let newTitan = this.state.titans.find((titansModel) => titansModel._id == event.target.id);
+              console.log(newTitan)
+              this.setState({"currentTitan": newTitan});
+
+            }
+
+            fieldChanged = (event) => {
+              let newTitan = this.state.currentTitan;
+              newTitan[event.target.name] = event.target.value;
+              this.setState({currentTitan: newTitan});
+
+          }
+
+          clearForm = (event) => {
+            this.setState({currentTitan: [{}]});
+          }
+
+
+          saveTitan = () => {
+            if (this.state.currentTitan == {}) return
+
+            let newTitan = this.state.currentTitan;
+
+
+            console.log(this.state.currentTitan)
+
+            fetch("/api/add/", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.state.currentTitan)
+            })
+                .then(res => res.json())
+
+                .then((json) => {
+
+                if (!newTitan._id) {
+                    newTitan._id = json._id;
+
+                    let newListTitans = this.state.titansModel;
+                    newListTitans.push(newTitan);
+                    this.setState({titansModel: newListTitans, currentTitan: {}})
+                }
+
+                });
         }
 
 
+        deleteTitan = () => {
+          let id = this.state.currentTitan._id;
+          if (this.state.currentTitan == {}) return;
 
-        const AllTitans = (props) => {
-          //const titans = <%- titans %>;
-
-          const listTitans = props.data.map((titansModel) =>
-
-          <li className="titanSelector" key={titansModel._id}  id={titansModel._id} onClick={props.clickHandler}>{titansModel.name}
-          </li>);
-
-
-          return <ul>{listTitans}</ul>
-        }
-
-
-        //trouble with {props.titansModel.name}
-
-        const TitanDetail = (props) => {
-          return  (
-              <div>
-                
-                  <aside><button onClick={props.resetHandler} type="button">Reset</button></aside>
-                  <h4>Details:</h4>
-
-                  <form>
-                    <label>Name: <input type="text" name="name" onChange={props.onChange} value={props.titansModel.name || ""}/></label>
-                    <label>Strength: <input type="text" name="strength" onChange={props.onChange} value={props.titansModel.str || ""}/></label>
-                    <label>Dexterity: <input type="text" name="dexterity" onChange={props.onChange} value={props.titansModel.dex || ""}/></label>
-                    <label>Constitution: <input type="text" name="constitution" onChange={props.onChange} value={props.titansModel.con || ""}/></label>
-                    <label>Intelligence: <input type="text" name="intelligence" onChange={props.onChange} value={props.titansModel.int || ""}/></label>
-                    <label>Wisdom: <input type="text" name="wisdom" onChange={props.onChange} value={props.titansModel.wis || ""}/></label>
-                    <label>Charisma: <input type="text" name="charisma" onChange={props.onChange} value={props.titansModel.cha || ""}/></label>
+          fetch(`api/delete/${id}`)
+              .then((res) => res.json())
+              .then(data => {
+                  const newListTitans = this.state.titans.filter((titansModel) => {
+                    return titansModel._id != id;
+                  });
+                  this.setState({titans: newListTitans, currentTitan: {}});
 
 
-                  </form>
-
-
-              </div>
-          )
+              });
       }
 
+            render() {
+              return <div>
+                <div className="container">
+                  <div className="row">
+                      <div className="full column">
+                          <div className="wrap">
+                            <aside><Greeting /></aside>
+                              <h1>Home</h1>
+                              <hr/>
 
-        class App extends React.Component {
-          constructor(props) {
-            super(props);
-            this.state = {
-              titans: <%- titans %>,
-              currentTitan: {}
-            };
-           //this.selectTitan = this.selectTitan.bind(this);
+                              <div className="detailContainer">
+                              < TitanDetail titansModel={this.state.currentTitan} onChange={this.fieldChanged} resetHandler={this.clearForm}
+                              deleteHandler={this.deleteTitan.bind(this)}
+                              saveHandler={this.saveTitan}
+
+                              />
+                              </div>
+                              <div className="titanContainer"><h3>Titans</h3>< AllTitans data={this.state.titans} clickHandler={this.showDetail.bind(this)} /></div>
+
+
+                             < Footer/>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              </div>;
+            }
           }
 
-          //click event handler
-          showDetail = (event) => {
-            let name = event.target.innerText;
-            let newTitan = this.state.titans.find((titansModel) => titansModel.name == name);
-            console.log(newTitan)
-            this.setState({"currentTitan": newTitan});
-
-          }
-
-          fieldChanged = (event) => {
-            let newTitan = this.state.currentTitan;
-            newTitan[event.target.name] = event.target.value;
-            this.setState({currentTitan: newTitan});
-        }
-
-        clearForm = (event) => {
-          this.setState({currentTitan: [{}]});
-        }
-
-
-
-          render() {
-            return <div>
-              <div className="container">
-                <div className="row">
-                    <div className="full column">
-                        <div className="wrap">
-                          <aside><Greeting /></aside>
-                            <h1>Home</h1>
-                            <hr/>
-                            
-                            <div className="detailContainer">< TitanDetail titansModel={this.state.currentTitan} onChange={this.fieldChanged} resetHandler={this.clearForm}/></div>
-                            <div className="titanContainer"><h3>Titans</h3>< AllTitans data={this.state.titans} clickHandler={this.showDetail} /></div>
-                           
-                   
-                           < Footer/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>;
-          }
-        }
-
-          ReactDOM.render(<App />, document.getElementById('root'));
+            ReactDOM.render(<App />, document.getElementById('root'));
     </script>
   </body>
 </html>
